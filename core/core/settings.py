@@ -74,13 +74,26 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+# qoveryadmin:gsnP8C6gsj8-5Ljl8esJeNwo0D2WMgUm@zeafa96e8-postgresql.zb20e5e48.qovery.fr:5432
+# qoveryadmin:PBK-93W-Ve1rH8WtddVIgRRssvR6wHVL@za0974ec8-postgresql.zb20e5e48.qovery.fr:5432 - older
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'qoveryadmin',
+        'PASSWORD': 'gsnP8C6gsj8-5Ljl8esJeNwo0D2WMgUm',
+        'HOST': 'zeafa96e8-postgresql.zb20e5e48.qovery.fr',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

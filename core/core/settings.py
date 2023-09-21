@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from decouple import config
+
+DEBUG = config('DEBUG', default=False, cast=bool)
+DB_HOST = config('DB_HOST')
+DB_PASSWORD = config('DB_PASSWORD')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,15 +88,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # }
 
 
-# qoveryadmin:gsnP8C6gsj8-5Ljl8esJeNwo0D2WMgUm@zeafa96e8-postgresql.zb20e5e48.qovery.fr:5432
-# qoveryadmin:PBK-93W-Ve1rH8WtddVIgRRssvR6wHVL@za0974ec8-postgresql.zb20e5e48.qovery.fr:5432 - older
+# qoveryadmin:Vqi2LjhIRgn4RRd-xoU92qqp3r-178IZ@z195b40b4-postgresql.czmgtrr6l4ym.us-east-2.rds.amazonaws.com:5432
+# qoveryadmin:gsnP8C6gsj8-5Ljl8esJeNwo0D2WMgUm@zeafa96e8-postgresql.zb20e5e48.qovery.fr:5432 - older
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'qoveryadmin',
-        'PASSWORD': 'gsnP8C6gsj8-5Ljl8esJeNwo0D2WMgUm',
-        'HOST': 'zeafa96e8-postgresql.zb20e5e48.qovery.fr',
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
         'PORT': '5432',
     }
 }
@@ -135,3 +141,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_URL = 'login'

@@ -5,8 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Youtube Summarizer</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <style>
+        @keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to { 
+        transform: rotate(360deg);
+    }
+}
+ 
+ @-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to { 
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.load {
+    width: 100px;
+    height: 100px;
+    margin: 110px auto 0;
+    border:solid 10px #8822aa;
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+     -webkit-transition: all 0.5s ease-in;
+    -webkit-animation-name:             rotate; 
+    -webkit-animation-duration:         1.0s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+        
+    transition: all 0.5s ease-in;
+    animation-name:             rotate; 
+    animation-duration:         1.0s; 
+    animation-iteration-count:  infinite;
+    animation-timing-function: linear; 
+}
+    </style>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <!-- <script defer src="script.js"></script> -->
 </head>
 <body>
     <!-- Navbar -->
@@ -15,9 +55,9 @@
             <h1 class="text-3xl font-bold">YouTube Summarizer</h1>
         </div>
         <div>
-            <a href="#" class="text-#FFFFFF hover:underline mx-4">Welcome </a>
+            <a href="#" class="text-#FFFFFF mx-4">Welcome {{ user.username }}</a>
             <a href="/blog-list" class="text-#FFFFFF hover:underline mx-4">Saved Summaries</a>
-            <a href="#" class="text-#FFFFFF hover:underline">Logout</a>
+            <a href="/logout" class="text-#FFFFFF hover:underline">Logout</a>
         </div>
     </nav>
 
@@ -44,8 +84,8 @@
             <div>
                 <h2 class="text-xl mb-4 font-semibold">Enter Youtube Video Link</h2>
                 <div class="flex space-x-4">
-                    <input id="youtubeLink" type="url" placeholder="Paste Youtube Link..." class="flex-grow p-2 border border-green-400 rounded-l-md">
-                    <button id="generateBlogButton" class="bg-green-500 text-white px-4 py-2 rounded-r-md hover:bg-green-700 transition-colors">Generate</button>
+                    <input id="link" type="url" placeholder="Paste Youtube Link..." class="flex-grow p-2 border border-green-400 rounded-l-md">
+                    <button id="button" class="bg-green-500 text-white px-4 py-2 rounded-r-md hover:bg-green-700 transition-colors">Generate</button>
                 </div>
             </div>
 
@@ -57,7 +97,7 @@
             <!-- Generated Blog Display Section -->
             <section class="mt-10 flex-grow">
                 <h2 class="text-xl mb-4 font-semibold">Generated Summary</h2>
-                <div id="blogContent" class="mt-2 text-gray-700 space-y-4">
+                <div id="summary" class="mt-2 text-gray-700 space-y-4">
                     
                 </div>
             </section>
@@ -68,6 +108,40 @@
     <footer class="text-center p-4 text-blacl mt-6">
         Made with 💚 by <a href="https://github.com/patnaikankit">Ankit Patnaik</a>
     </footer>
+
+    <script>
+        // here we are trying the check the link provided by the user and send it for further processing
+        // if the link is valid we will extract the transcript and pass it the gpt api for the genearting the summary
+        document.getElementById('button').addEventListener('click', async () => {
+            const link = document.getElementById('link').value;
+            const summary = document.getElementById('summary');
+            if(link){
+                document.getElementById('loading-circle').style.display = 'block';
+                summary.innerHTML = ''; 
+                const endpointUrl = '/genarate-summary';  
+                // once we have the link we will provide that to a specified route where the rest of the task can be done
+                try{
+                    const response = await fetch(endpointUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ link: link })
+                    });
+                    const data = await response.json();
+                    summary.innerHTML = data.content;
+                } 
+                catch(error){
+                    console.error("Error occurred:", error);
+                    alert("Something went wrong. Please try again later.");
+                }
+                document.getElementById('loading-circle').style.display = 'none';
+            } 
+            else{
+                alert("Please enter a valid YouTube link.");
+            }
+        });
+    </script>
 
 </body>
 </html>

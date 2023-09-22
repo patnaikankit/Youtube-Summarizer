@@ -14,9 +14,9 @@ from pathlib import Path
 import os
 from decouple import config
 
-DEBUG = config('DEBUG', default=False, cast=bool)
-DB_HOST = config('DB_HOST')
-DB_PASSWORD = config('DB_PASSWORD')
+# DEBUG = config('DEBUG', default=False, cast=bool)
+# DB_HOST = config('DB_HOST')
+# DB_PASSWORD = config('DB_PASSWORD')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,16 +87,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
-
-# qoveryadmin:Vqi2LjhIRgn4RRd-xoU92qqp3r-178IZ@z195b40b4-postgresql.czmgtrr6l4ym.us-east-2.rds.amazonaws.com:5432
-# qoveryadmin:gsnP8C6gsj8-5Ljl8esJeNwo0D2WMgUm@zeafa96e8-postgresql.zb20e5e48.qovery.fr:5432 - older
+# qoveryadmin:ZAuIY7Hsy-5u5mg3BtCP1CZbivIYgfUe@z4d09611d-postgresql.czmgtrr6l4ym.us-east-2.rds.amazonaws.com:5432
+# qoveryadmin:Ym7i6p1lHNX8g5PXBVOK-44ab-Qd1obA@zc8ebe349-postgresql.czmgtrr6l4ym.us-east-2.rds.amazonaws.com:5432
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'qoveryadmin',
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
+        'PASSWORD': 'ZAuIY7Hsy-5u5mg3BtCP1CZbivIYgfUe',
+        'HOST': 'z4d09611d-postgresql.czmgtrr6l4ym.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     }
 }

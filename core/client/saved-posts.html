@@ -11,11 +11,13 @@
     <!-- Navbar -->
     <nav class="bg-green-500 p-4 text-white flex justify-between">
         <div>
-            <h1 class="text-3xl font-bold">Youtube Summarizer</h1>
+            <a href=".">
+                <h1 class="text-3xl font-bold">YouTube Summarizer</h1>
+            </a>
         </div>
         <div>
             <a href="#" class="text-white hover:underline mx-4">Welcome {{ user.username }}</a>
-            <a href="/blog-list" class="text-white hover:underline mx-4">Saved Blog Posts</a>
+            <a href="/list" class="text-white hover:underline mx-4">Saved Summaries</a>
             <a href="#" class="text-white hover:underline">Logout</a>
         </div>
     </nav>
@@ -27,13 +29,13 @@
             <section>
                 <h2 class="text-xl mb-4 font-semibold">Summary Details</h2>
                 <div class="border border-gray-300 p-4 rounded-lg">
-                    <h3 class="text-lg font-semibold">{{blog_article_detail.youtube_title}}</h3>
-                    <p class="text-gray-700">{{blog_article_detail.generated_content}}</p>
+                    <h3 class="text-lg font-semibold">{{detail.yt_title}}</h3>
+                    <p class="text-gray-700">{{detail.generated_content}}</p>
                     <hr class="my-4 border-gray-300">
                     <h4 class="text-lg font-semibold">Youtube Title</h4>
-                    <p class="text-gray-700">{{blog_article_detail.youtube_title}}</p>
+                    <p class="text-gray-700">{{detail.yt_title}}</p>
                     <h4 class="text-lg font-semibold mt-4">Youtube Link</h4>
-                    <a href="{{blog_article_detail.youtube_link}}" class="text-blue-600 hover:underline">{{blog_article_detail.youtube_link}}</a>
+                    <a href="{{detail.youtube_link}}" class="text-blue-600 hover:underline">{{detail.yt_link}}</a>
                 </div>
             </section>
         </div>

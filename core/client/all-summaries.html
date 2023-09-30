@@ -10,13 +10,17 @@
 <body class="bg-gray-100 font-sans antialiased">
     
     <!-- Navbar -->
-    <nav class="bg-blue-600 p-4 text-white flex justify-between">
+    <nav class="bg-green-500 p-4 text-white flex justify-between">
         <div>
-            <h1 class="text-3xl font-bold">Youtube Summarizer</h1>
+            <a href=".">
+                <h1 class="text-3xl font-bold">YouTube Summarizer</h1>
+            </a>
         </div>
         <div>
-            <a href="#" class="text-white hover:underline mx-4">Welcome {{ user.username }}</a>
-            <a href="/blog-list" class="text-white hover:underline mx-4">Saved Summaries</a>
+            {% if user.is_authenticated %}
+            <a href="#" class="text-white mx-4">Welcome {{ user.username }}</a>
+            {% endif %}
+            <a href="/list" class="text-white hover:underline mx-4">Saved Summaries</a>
             <a href="#" class="text-white hover:underline">Logout</a>
         </div>
     </nav>
@@ -31,7 +35,7 @@
                 <div class="space-y-4">
                     
                     {% for item in list_details reversed %}
-                    <a href="blog-details/{{item.id}}">
+                    <a href="list-details/{{item.id}}">
                         <div class="border border-gray-300 p-4 rounded-lg">
                             <h3 class="text-lg font-semibold">{{item.yt_title}}</h3>
                             <p>{{item.generated_content|truncatechars:80}}</p>
@@ -47,7 +51,7 @@
     </div>
 
     <footer class="text-center p-4 text-blacl mt-6">
-        Powered by <a href="https://www.youtube.com/codewithtomi">Code With Tomi</a>
+        Made with 💚 by <a href="https://github.com/patnaikankit">Ankit Patnaik</a>
     </footer>
 </body>
 </html>

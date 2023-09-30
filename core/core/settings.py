@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from decouple import config
 
+
 # DEBUG = config('DEBUG', default=False, cast=bool)
 # DB_HOST = config('DB_HOST')
 # DB_PASSWORD = config('DB_PASSWORD')
@@ -87,18 +88,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
-# qoveryadmin:ZAuIY7Hsy-5u5mg3BtCP1CZbivIYgfUe@z4d09611d-postgresql.czmgtrr6l4ym.us-east-2.rds.amazonaws.com:5432
-# qoveryadmin:Ym7i6p1lHNX8g5PXBVOK-44ab-Qd1obA@zc8ebe349-postgresql.czmgtrr6l4ym.us-east-2.rds.amazonaws.com:5432
+# qoveryadmin:SHxviG6VimOVXG9yO-Y1eqeXPSh4cfVN@z74efdbc0-postgresql.czmgtrr6l4ym.us-east-2.rds.amazonaws.com:5432
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'qoveryadmin',
-        'PASSWORD': 'ZAuIY7Hsy-5u5mg3BtCP1CZbivIYgfUe',
-        'HOST': 'z4d09611d-postgresql.czmgtrr6l4ym.us-east-2.rds.amazonaws.com',
-        'PORT': '5432',
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': config('DATABASE_PORT'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

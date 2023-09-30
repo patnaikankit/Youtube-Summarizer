@@ -6,7 +6,7 @@
     <title>Youtube Summarizer</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-grat-100 font-sans antialiased">
+<body class="bg-gray-100 font-sans antialiased">
 
     <!-- Navbar -->
     <nav class="bg-green-500 p-4 text-white flex justify-between">
@@ -29,19 +29,23 @@
             <section>
                 <h2 class="text-xl mb-4 font-semibold">Summary Details</h2>
                 <div class="border border-gray-300 p-4 rounded-lg">
-                    <h3 class="text-lg font-semibold">{{detail.yt_title}}</h3>
-                    <p class="text-gray-700">{{detail.generated_content}}</p>
+                    {% if detail %}
+                    <h3 class="text-lg font-semibold">{{ detail.yt_title }}</h3>
+                    <p class="text-gray-700">{{ detail.generated_content }}</p>
                     <hr class="my-4 border-gray-300">
                     <h4 class="text-lg font-semibold">Youtube Title</h4>
-                    <p class="text-gray-700">{{detail.yt_title}}</p>
+                    <p class="text-gray-700">{{ detail.yt_title }}</p>
                     <h4 class="text-lg font-semibold mt-4">Youtube Link</h4>
-                    <a href="{{detail.youtube_link}}" class="text-blue-600 hover:underline">{{detail.yt_link}}</a>
+                    <a href="{{ detail.yt_link }}" class="text-blue-600 hover:underline">{{ detail.yt_link }}</a>
+                    {% else %}
+                    <p>No details available.</p>
+                    {% endif %}
                 </div>
             </section>
         </div>
     </div>
 
-    <footer class="text-center p-4 text-blacl mt-6">
+    <footer class="text-center p-4 text-black mt-6">
         Made with 💚 by <a href="https://github.com/patnaikankit">Ankit Patnaik</a>
     </footer>
 </body>

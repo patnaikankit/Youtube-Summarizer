@@ -18,10 +18,6 @@ from .models import SavedSummary
 
 # Create your views here.
 
-aai_key = os.environ.get('AAI_KEY')
-gpt_key = os.environ.get('GPT_KEY')
-
-
 @login_required
 def index(request):
     return render(request, 'index.html')
@@ -50,7 +46,7 @@ def download_audio(link):
 def get_transcript(link):
     # we will genarate the transcript of the video from the audio file of the video
     audio_file = download_audio(link)
-    aai.settings.api_key = aai_key
+    aai.settings.api_key = '1532701b77914314902b9fd578b433aa'
 
     transcriber = aai.Transcriber()
     transcript = transcriber.transcribe(audio_file)
@@ -61,7 +57,7 @@ def get_transcript(link):
 
 # to convert the transcript to summaries using the openai 
 def generate_summary_openai(transcription):
-    openai.api_key = gpt_key
+    openai.api_key = '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'
 
     # we pass prompt to the api in the following manner
     prompt = f"Based on the following transcript from a YouTube video, create an extensive and comprehensive summary that thoroughly covers all key points and main ideas. Ensure that the summary is well-structured and coherent, and distinctly different from a YouTube video. Make it resemble a professional summary:\n\n{transcription}\n\nSummary:"
@@ -105,7 +101,7 @@ def genarate_summary(request):
 
         # Saving the generated summary of the video with the authenticated user
         new_summary = SavedSummary.objects.create(
-            user=request.user,  # Associate the summary with the authenticated user
+            user=request.user,  # Associate the summary with the authenticated user and only for that user
             yt_title=title,
             yt_link=link,
             generated_content=content
@@ -126,7 +122,7 @@ def list(request):
     
 
 
-# to show all the details of a previous summary
+# to show all the details of a particular summary
 def list_details(request, pk):
     detail = SavedSummary.objects.get(id=pk)
     if request.user == detail.user:

@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-@2x4obrg!nbdor@3-1s8cdyd4t244uw%%0@1wmfuyt!0f+o6s%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -92,11 +92,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DATABASE_NAME'),
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': config('DATABASE_HOST'),
-        'PORT': config('DATABASE_PORT'),
+        'NAME': 'vissopwt',  # Database name
+        'USER': 'vissopwt',  # Database username
+        'PASSWORD': 'lfjtxbWhrN9w9wGQxQSDgLhfXGyYf-2Y',  # Database password
+        'HOST': 'peanut.db.elephantsql.com',  # Database host
+        'PORT': '5432',  # Database port
     }
 }
 

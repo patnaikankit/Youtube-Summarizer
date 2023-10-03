@@ -60,7 +60,7 @@ def get_transcript(link):
 
 # to convert the transcript to summaries using the openai 
 def generate_summary_openai(transcription):
-    openai.api_key = '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'
+    openai.api_key = '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'
 
     # we pass prompt to the api in the following manner
     prompt = f"Based on the following transcript from a YouTube video, create an extensive and comprehensive summary that thoroughly covers all key points and main ideas. Ensure that the summary is well-structured and coherent, and distinctly different from a YouTube video. Make it resemble a professional summary:\n\n{transcription}\n\nSummary:"

@@ -37,6 +37,8 @@
                     <p class="text-gray-700">{{ detail.yt_title }}</p>
                     <h4 class="text-lg font-semibold mt-4">Youtube Link</h4>
                     <a href="{{ detail.yt_link }}" class="text-blue-600 hover:underline">{{ detail.yt_link }}</a>
+                    <h4 class="text-lg font-semibold mt-4">Created At</h4>
+                    <p class="text-gray-700">{{ detail.created_at }}</p>
                     {% else %}
                     <p>No details available.</p>
                     {% endif %}

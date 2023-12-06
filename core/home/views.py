@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -18,8 +19,10 @@ from .models import SavedSummary
 
 # Create your views here.
 
-aai_key = os.environ.get('AAI_KEY')
-gpt_key = os.environ.get('GPT_KEY')
+load_dotenv()
+
+AAI_KEY = os.getenv('AAI_KEY', '')
+GPT_KEY = os.getenv('GPT_KEY', '')
 
 
 @login_required
@@ -50,7 +53,7 @@ def download_audio(link):
 def get_transcript(link):
     # we will genarate the transcript of the video from the audio file of the video
     audio_file = download_audio(link)
-    aai.settings.api_key = '1532701b77914314902b9fd578b433aa'
+    aai.settings.api_key = AAI_KEY
     transcriber = aai.Transcriber()
     transcript = transcriber.transcribe(audio_file)
 
@@ -60,7 +63,7 @@ def get_transcript(link):
 
 # to convert the transcript to summaries using the openai 
 def generate_summary_openai(transcription):
-    openai.api_key = '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'
+    openai.api_key = GPT_KEY
 
     # we pass prompt to the api in the following manner
     prompt = f"Based on the following transcript from a YouTube video, create an extensive and comprehensive summary that thoroughly covers all key points and main ideas. Ensure that the summary is well-structured and coherent, and distinctly different from a YouTube video. Make it resemble a professional summary:\n\n{transcription}\n\nSummary:"
